@@ -18,7 +18,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: 'GET, POST, PUT, DELETE, OPTIONS',
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+}));
 
 
 const uri = 'mongodb+srv://1032211870:dpzhpAXhpsKcz3ly@itinerary-planner.1ayzh2g.mongodb.net/?retryWrites=true&w=majority&appName=itinerary-planner';

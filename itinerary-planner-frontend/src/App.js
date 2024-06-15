@@ -18,13 +18,22 @@ function App() {
   }, []);
 
   const addTask = (task) => {
-    axios.post('https://itinerary-planner-backend.vercel.app/tasks', task)
+    console.log(task);
+    axios.post('https://itinerary-planner-backend.vercel.app/tasks', task, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => setTasks([...tasks, response.data]))
       .catch(error => console.error(error));
   };
 
   const updateTask = (updatedTask) => {
-    axios.put(`https://itinerary-planner-backend.vercel.app/tasks/${updatedTask._id}`, updatedTask)
+    axios.put(`https://itinerary-planner-backend.vercel.app/tasks/${updatedTask._id}`, updatedTask, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
         setTasks(tasks.map(task => task._id === updatedTask._id ? response.data : task));
       })
