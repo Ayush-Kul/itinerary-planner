@@ -6,6 +6,7 @@ Modal.setAppElement('#root');
 
 function TaskModal({ isOpen, onClose, onSave, onDelete, task, isDeleteMode }) {
     const [text, setText] = useState('');
+    const [error, setError] = useState(null); // State for error message
 
     useEffect(() => {
         if (task) {
@@ -22,9 +23,21 @@ function TaskModal({ isOpen, onClose, onSave, onDelete, task, isDeleteMode }) {
             onClose();
             return;
         }
+
+        // Validation: Check if text is empty
+        if (text.trim() === '') {
+            setError('Task cannot be empty');
+            return;
+        }
+
         const taskToSave = task ? { ...task, text } : { text, completed: false };
         onSave(taskToSave);
         onClose();
+    };
+
+    const handleTextChange = (e) => {
+        setText(e.target.value);
+        setError(null); // Clear error when user starts typing again
     };
 
     return (
@@ -45,10 +58,11 @@ function TaskModal({ isOpen, onClose, onSave, onDelete, task, isDeleteMode }) {
                             <input
                                 type="text"
                                 value={text}
-                                onChange={(e) => setText(e.target.value)}
+                                onChange={handleTextChange}
                                 required
                             />
                         </label>
+                        {error && <p className="error-message">{error}</p>} {/* Display error message */}
                         <div className="modal-buttons">
                             <button className="save-button" type="submit">Save</button>
                             <button className="cancel-button" type="button" onClick={onClose}>Cancel</button>

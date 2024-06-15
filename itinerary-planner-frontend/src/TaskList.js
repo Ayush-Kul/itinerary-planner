@@ -3,6 +3,7 @@ import './TaskList.css';
 
 function TaskList({ tasks, onEdit, onDelete, onToggleComplete }) {
     const sortedTasks = [...tasks].sort((a, b) => a.completed - b.completed);
+    console.log(sortedTasks);
 
     return (
         <div className="task-list">
