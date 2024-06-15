@@ -12,19 +12,19 @@ function App() {
   const [taskToDelete, setTaskToDelete] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/tasks')
+    axios.get('https://itinerary-planner-backend.vercel.app/tasks')
       .then(response => setTasks(response.data))
       .catch(error => console.error(error));
   }, []);
 
   const addTask = (task) => {
-    axios.post('http://localhost:5000/tasks', task)
+    axios.post('https://itinerary-planner-backend.vercel.app/tasks', task)
       .then(response => setTasks([...tasks, response.data]))
       .catch(error => console.error(error));
   };
 
   const updateTask = (updatedTask) => {
-    axios.put(`http://localhost:5000/tasks/${updatedTask._id}`, updatedTask)
+    axios.put(`https://itinerary-planner-backend.vercel.app/tasks/${updatedTask._id}`, updatedTask)
       .then(response => {
         setTasks(tasks.map(task => task._id === updatedTask._id ? response.data : task));
       })
@@ -32,7 +32,7 @@ function App() {
   };
 
   const deleteTask = (taskId) => {
-    axios.delete(`http://localhost:5000/tasks/${taskId}`)
+    axios.delete(`https://itinerary-planner-backend.vercel.apps/tasks/${taskId}`)
       .then(() => {
         setTasks(tasks.filter(task => task._id !== taskId));
       })
