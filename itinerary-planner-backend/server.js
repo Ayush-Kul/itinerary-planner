@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
-app.use(bodyParser.json());
+
 
 const uri = 'mongodb+srv://1032211870:dpzhpAXhpsKcz3ly@itinerary-planner.1ayzh2g.mongodb.net/?retryWrites=true&w=majority&appName=itinerary-planner';
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
