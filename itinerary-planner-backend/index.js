@@ -18,11 +18,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(cors({
-    origin: '*',
+const corsOptions = {
+    origin: 'https://itinerary-planner-frontend.vercel.app',
     methods: 'GET, POST, PUT, DELETE, OPTIONS',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-}));
+};
+app.use(cors(corsOptions));
 
 
 const uri = 'mongodb+srv://1032211870:dpzhpAXhpsKcz3ly@itinerary-planner.1ayzh2g.mongodb.net/?retryWrites=true&w=majority&appName=itinerary-planner';
