@@ -4,6 +4,19 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    next();
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -19,6 +32,9 @@ const TaskSchema = new mongoose.Schema({
 
 const Task = mongoose.model('Task', TaskSchema);
 
+app.get("/", async (req, res) => {
+    res.status(200).json({ message: "Itinerary planner is live" });
+});
 app.post('/tasks', async (req, res) => {
     const task = new Task(req.body);
     await task.save();
