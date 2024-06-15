@@ -41,7 +41,7 @@ function App() {
   };
 
   const deleteTask = (taskId) => {
-    axios.delete(`https://itinerary-planner-backend.vercel.apps/tasks/${taskId}`)
+    axios.delete(`https://itinerary-planner-backend.vercel.app/tasks/${taskId}`)
       .then(() => {
         setTasks(tasks.filter(task => task._id !== taskId));
       })
